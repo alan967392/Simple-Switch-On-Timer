@@ -1,0 +1,33 @@
+{
+	"packageName": "Simple Switch On Timer",
+	"minimumHEVersion": "2.1.9",
+	"author": "Alan Eisen",
+	"version": "1.0.0",
+	"dateReleased": "2021-10-08",
+	"documentationLink": "link.to.documentation",
+	"communityLink": "link.to.forum.thread",
+	"licenseFile": "link.to.license.file.that.must.be.accepted",
+	"releaseNotes": "See community Thread.",
+	"apps" : [
+		{
+			"id" : "bf7c20fb-1fa9-436f-9cfc-fb8520cda22a",
+			"name": "Simple Switch On Timers",
+			"namespace": "nsudrivers",
+			"location": "https://github.com/alan967392/Simple-Switch-On-Timer/blob/main/app/Simple-Switch-On-Timers.groovy",
+			"required": true,
+			"oauth": false,
+			"primary": true
+		}
+	],
+	"apps" : [
+		{
+			"id" : "bf7c20fb-1fa9-436f-9cfc-fb8520cda22a",
+			"name": "Simple Switch On Timer",
+			"namespace": "nsudrivers",
+			"location": "https://github.com/alan967392/Simple-Switch-On-Timer/blob/main/app/Simple-Switch-On-Timer.groovy",
+			"required": true,
+			"oauth": false,
+			"primary": true
+		}
+	],
+}
