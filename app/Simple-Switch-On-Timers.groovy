@@ -26,6 +26,12 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
+// Simple Switch Off Timer:
+// Version 1.0.0    Initial release
+//
+// Simple Switch On Timer:
+//         1.0.0    Initial Release as "Simple Switch On Timer"
+
 
 definition(
     name: "Simple Switch On Timers",
