@@ -26,8 +26,11 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
+// Simple Switch Off Timer:
 // Version 1.0.0    Initial release
-// Version 1.1.0    Add App Events
+//         1.1.0    Add App Events
+//
+// Simple Switch On Timer:
 //         1.0.0    Initial Release as "Simple Switch On Timer"
 //
 
