@@ -75,34 +75,48 @@ def configPage()
         section("")
         {
             input name: "appEvents", title: "Enable app events", type: "bool", defaultValue: false
+            input name: "logDebugEnabled", title: "Eneable Debug Log Messsages?", type: "bool", defaultValue: false
         }
     }
 }
 
 def checkLabel()
 {
+    logDebug("in checkLabel")
+    logDebug("configSwitch: ${configSwitch}")
+    
     if (configSwitch)
     {
         oldLabel = app.getLabel()
-        newLabel = "${configSwitch} on after ${configMinutes}:${configSeconds} minutes"
+        logDebug("oldLabel: ${oldLabel}")
+        newLabel = "${configSwitch} on after ${configMinutes}:${formatToTwoPositions(configSeconds)} minutes/seconds"
+        logDebug("newLabel: ${newLabel}")
+
         if (newLabel != oldLabel)
         {
             if (oldLabel) log.info "Simple Switch On Timer changed: ${oldLabel} -> ${newLabel}"
             app.updateLabel(newLabel)
+            logDebug("Label Updated")
         }
     }
 }
 
 def installed()
 {
+    logDebug("in Installed")
+    logDebug("configMinutes: ${configMinutes}")
+    logDebug("configSeconds: ${configSeconds}")
+    
     checkLabel()
-
-    if (configMinutes)
+    if (((configMinutes) && (configSeconds)) || (configSeconds))
     {
         subscribe(configSwitch, "switch", switchEvent)
+        logDebug("subscribe set")
+        
         if (configSwitch.currentState("switch").value == "off")
         {
             runIn(((configMinutes.toInteger() * 60) + configSeconds.toInteger()), switchOn)
+            logDebug("RunIn set")
         }
     }
 }
@@ -115,7 +129,9 @@ def updated() {
 
 def switchOn()
 {
-    String desc = "Switch On Timer: ${configSwitch} turned on after ${configMinutes}:${configSeconds} minutes"
+    logDebug("in switchOn")
+
+    String desc = "Switch On Timer: ${configSwitch} turned on after ${configMinutes}:${configSeconds} minutes/seconds"
     log.info "${desc}"
     if (appEvents) sendEvent(name: "SSA", value: "On", descriptionText: "${desc}")
     configSwitch.on()
@@ -123,9 +139,12 @@ def switchOn()
 
 def switchEvent(e)
 {
+    logDebug("in switchEvent")
+    logDebug("e: ${e}")
+             
     if (e.value == "off")
     {
-        String desc = "Switch On Timer: ${configSwitch} On after ${configMinutes}:${configSeconds} minutes scheeduled"
+        String desc = "Switch On Timer: ${configSwitch} On after ${configMinutes}:${formatToTwoPositions(configSeconds)} minutes scheeduled"
         log.info "${desc}"
         runIn(((configMinutes.toInteger() * 60) + configSeconds.toInteger()), switchOn)
     }
@@ -133,4 +152,22 @@ def switchEvent(e)
     {
         unschedule()
     }
+}
+
+def formatToTwoPositions(val) {
+
+    def res
+    
+    if (val < 10)
+        res = "0" + val.toString()
+    else
+        res = val.toString()
+    
+    return res
+}
+
+private logDebug(msg) {
+	if (logDebugEnabled) {
+		log.debug "$msg"
+	}
 }
